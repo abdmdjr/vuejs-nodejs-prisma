@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: Roboto, sans-serif;
+}
+
+body {
+  @apply bg-gray-100 text-gray-800 flex items-center justify-center h-screen;
+}
+
+.neumorphic-btn {
+    border-radius: 10%;
+    background: #f7f7f7;
+    box-shadow:
+      -10px -10px 30px #fff,
+      10px 10px 30px #aeaec040;
+}
