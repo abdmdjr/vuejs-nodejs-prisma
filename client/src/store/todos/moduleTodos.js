@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Vue from 'vue';
 
 export default ({
   isRegistered: false,
@@ -18,7 +19,7 @@ export default ({
     },
     UPDATE_TODO(state, todo) {
       const todoIndex = state.todos.findIndex((el) => el.id === todo.id);
-      state.todos[todoIndex] = todo;
+      Vue.set(state.todos, todoIndex, todo);
     },
     DELETE_TODO(state, todoId) {
       const todoIndex = state.todos.findIndex((el) => el.id === todoId);
@@ -38,17 +39,19 @@ export default ({
       return res.data;
     },
     async addTodo({ commit }, todo) {
+      let res = [];
       try {
-        const res = await axios.post('/api/new-todo', todo);
+        res = await axios.post('/api/new-todo', { todo });
         commit('ADD_TODO', res.data);
       } catch (err) {
         console.log(err);
       }
+      return res.data;
     },
     async updateTodo({ commit }, todo) {
       let res = {};
       try {
-        res = await axios.put(`/api/done/${todo.id}`, todo);
+        res = await axios.put(`/api/done/${todo.id}`, { todo });
         commit('UPDATE_TODO', res.data);
       } catch (err) {
         console.log(err);
@@ -63,5 +66,9 @@ export default ({
         console.log(err);
       }
     },
+  },
+  getters: {
+    filterTodosPending: (state) => state.todos.filter((todo) => !todo.done),
+    filterTodosDone: (state) => state.todos.filter((todo) => todo.done),
   },
 });

@@ -11,7 +11,14 @@ generator client {
 }
 
 model Todo {
-  id      Int      @id @default(autoincrement())
-  done    Boolean? @default(false)
+  id      Int     @id @default(autoincrement())
+  done    Boolean @default(false)
   content String
+  tags    Tag[]   @relation(references: [id])
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  title String
+  todos Todo[] @relation(references: [id])
 }
