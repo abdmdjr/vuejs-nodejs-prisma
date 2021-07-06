@@ -16,16 +16,16 @@ app.get('/api/todos', async (req, res) => {
 
 app.post('/api/new-todo', async (req, res) => {
   const { todo } = req.body;
-  const idTag = todo.tags.map((el) => {
+  const idTag = todo.tags.map((tag) => {
     return obj = {
-      id: el.id
+      id: tag.id
     }
   })
   const newTodo = await prisma.todo.create({
     data: {
       content: todo.content,
       tags: {
-        connect: idTag
+        connect: idTag // [{id: 1}, {id: 2}, {id: 3} ...]
       }
     },
     include: {
