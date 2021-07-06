@@ -14,7 +14,7 @@ export default ({
       state.totalTodo = todos.length;
     },
     ADD_TODO(state, todo) {
-      state.todos.push(todo);
+      state.todos.unshift(todo);
       state.totalTodo += 1;
     },
     UPDATE_TODO(state, todo) {

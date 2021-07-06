@@ -107,8 +107,9 @@ export default {
     addTag(newTag) {
       this.$store.dispatch('tags/addTag', newTag);
     },
-    updateTodo(todo) {
-      this.$store.dispatch('todos/updateTodo', todo);
+    async updateTodo(todo) {
+      await this.$store.dispatch('todos/updateTodo', todo);
+      this.fetchTodos();
     },
     deleteTodo(todo) {
       this.$store.dispatch('todos/deleteTodo', todo.id);
