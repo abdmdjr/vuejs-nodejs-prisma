@@ -1,0 +1,39 @@
+  
+version: '3.8'
+services:
+  postgres:
+    build:
+      context: docker/dev/postgres
+      dockerfile: Dockerfile
+    restart: always
+    container_name: "postgres"
+    volumes:
+      - database:/var/lib/postgres/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=abdel
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=vuejsprisma_dev
+  nodejs:
+    build:
+      context: docker/dev/api
+      dockerfile: Dockerfile
+    depends_on: 
+      - postgres
+    ports:
+      - "3080:3080"
+    volumes:
+      - ./api:/var/www/api
+  client:
+    build:
+      context: docker/dev/client
+      dockerfile: Dockerfile
+    depends_on: 
+      - nodejs
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./client:/var/www/client
+volumes:
+  database:

@@ -1,2 +1,2 @@
-# vuejs-nodejs-docker-compose
-Example project for Developing Vuejs with Docker Compose 
+# vue-express-prisma
+Example project for Developing Vuejs - Expressjs - Prisma app

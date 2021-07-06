@@ -1,0 +1,21 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon ./server.js localhost 3080"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.25.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.4",
+    "random-id": "^1.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "prisma": "^2.25.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-stream": "^5.2.1"
+  }
+}
