@@ -1,2 +1,2 @@
 # vue-express-prisma
-Example project for Developing Vuejs - Expressjs - Prisma app
+Todolist project developing Vuejs - Expressjs - Prisma
