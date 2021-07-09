@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Vue from 'vue';
+import cloneDeep from 'lodash.clonedeep';
 
 export default ({
   isRegistered: false,
@@ -13,8 +14,8 @@ export default ({
       state.todos = todos;
       state.totalTodo = todos.length;
     },
-    ADD_TODO(state, todo) {
-      state.todos.unshift(todo);
+    ADD_TODO(state, newTodo) {
+      state.todos.unshift(newTodo);
       state.totalTodo += 1;
     },
     UPDATE_TODO(state, todo) {
@@ -39,7 +40,7 @@ export default ({
       return res.data;
     },
     async addTodo({ commit }, todo) {
-      let res = [];
+      let res = {};
       try {
         res = await axios.post('/api/new-todo', { todo });
         commit('ADD_TODO', res.data);
@@ -68,7 +69,6 @@ export default ({
     },
   },
   getters: {
-    filterTodosPending: (state) => state.todos.filter((todo) => !todo.done),
-    filterTodosDone: (state) => state.todos.filter((todo) => todo.done),
+    todosCopy: (state) => cloneDeep(state.todos),
   },
 });

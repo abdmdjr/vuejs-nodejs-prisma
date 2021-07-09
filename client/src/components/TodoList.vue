@@ -79,20 +79,18 @@ export default {
     createTodo,
   },
   computed: {
+    todosCopy() {
+      return this.$store.getters['todos/todosCopy'];
+    },
     todoPending() {
-      return this.$store.getters['todos/filterTodosPending'];
+      return this.todosCopy.filter((t) => t.done === false);
     },
     todoDone() {
-      return this.$store.getters['todos/filterTodosDone'];
+      return this.todosCopy.filter((t) => t.done === true);
     },
   },
   data() {
     return {
-      todo: {
-        content: '',
-        done: false,
-        tags: [],
-      },
       isEditing: false,
       currentTodoId: Number,
     };

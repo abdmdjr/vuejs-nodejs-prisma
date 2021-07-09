@@ -10,4 +10,5 @@ export default new Vuex.Store({
     moduleTodos,
     moduleTags,
   },
+  strict: process.env.NODE_ENV !== 'production',
 });
