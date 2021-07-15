@@ -18,6 +18,8 @@
       trackBy="id"
       placeholder="Choose or add tag"
       tag-placeholder="Add this as new tag"
+      :close-on-select="false"
+      :limit="2"
     ></multiselect>
     <button
       class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-blue-900 hover:bg-gray-100"
@@ -50,6 +52,8 @@ export default {
     addTodo() {
       if (this.todo.content) {
         this.$emit('on-new-todo', this.todo);
+        this.todo.content = '';
+        this.todo.tags = [];
       }
     },
     addTag(newTag) {

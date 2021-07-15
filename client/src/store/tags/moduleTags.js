@@ -30,7 +30,7 @@ export default ({
     },
     async addTag({ commit }, tag) {
       try {
-        const res = await axios.post('/api/new-tag', tag);
+        const res = await axios.post('/api/tag/add', tag);
         commit('ADD_TAG', res.data);
       } catch (err) {
         console.log(err);

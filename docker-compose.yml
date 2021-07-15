@@ -35,5 +35,15 @@ services:
       - "8080:8080"
     volumes:
       - ./client:/var/www/client
+  meilisearch:
+    build:
+      context: docker/dev/meilisearch
+      dockerfile: Dockerfile
+    depends_on: 
+      - nodejs
+    ports:
+      - "7700:7700"
+    volumes:
+      - ./client:/var/www/meilisearch
 volumes:
   database:

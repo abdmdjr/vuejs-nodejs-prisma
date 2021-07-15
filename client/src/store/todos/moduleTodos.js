@@ -34,6 +34,7 @@ export default ({
       try {
         res = await axios.get('/api/todos');
         commit('SET_TODOS', res.data);
+        await axios.get('/api/meilisearch');
       } catch (err) {
         console.log(err);
       }
@@ -42,8 +43,9 @@ export default ({
     async addTodo({ commit }, todo) {
       let res = {};
       try {
-        res = await axios.post('/api/new-todo', { todo });
+        res = await axios.post('/api/todo/add', { todo });
         commit('ADD_TODO', res.data);
+        await axios.get('/api/meilisearch');
       } catch (err) {
         console.log(err);
       }
@@ -52,8 +54,9 @@ export default ({
     async updateTodo({ commit }, todo) {
       let res = {};
       try {
-        res = await axios.put(`/api/done/${todo.id}`, { todo });
+        res = await axios.put(`/api/todo/update/${todo.id}`, { todo });
         commit('UPDATE_TODO', res.data);
+        await axios.get('/api/meilisearch');
       } catch (err) {
         console.log(err);
       }
@@ -61,8 +64,9 @@ export default ({
     },
     async deleteTodo({ commit }, todoId) {
       try {
-        await axios.delete(`/api/delete/${todoId}`);
+        await axios.delete(`/api/todo/delete/${todoId}`);
         commit('DELETE_TODO', todoId);
+        await axios.delete(`/api/meilisearch/${todoId}`);
       } catch (err) {
         console.log(err);
       }
